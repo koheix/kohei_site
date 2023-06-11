@@ -1,0 +1,9 @@
+# node_modulesをgit管理しない
+node_modules/
+# 画像ファイルをgit管理しない
+beforepics/
+pics/
+photo/
+images/
+# 曲などもgit管理しない
+20220625.mp3
