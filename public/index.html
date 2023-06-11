@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset = "utf-8"/>
+	<!-- CSSファイルを読み込む -->
+     	<link rel="stylesheet" href="./style.css" />
+		<title>まなちゃんカレンダー</title>
+    </head>
+    <body>
+	<div class = "wrapper">
+		
+		<div class = "datechange_wrapper">
+			
+			<div class = "back_button">
+				<input type = "button" value="戻る" id = "back_button">
+			</div>
+			
+			<!--
+			<div class = "forward_button">
+				<input type = "button" value="めくる" id = "forward_button">
+			</div>
+			-->
+			<div class = "reset_button">
+				<input type = "button" value="今日にする" id= "reset_button">
+			</div>
+		</div>
+		
+		<div class = date_wrapper>
+			<div class = "month_text" id = "month_text">
+				month
+			</div>
+			<div class = "date_text" id = "date_text">
+				date
+			</div>
+		</div>
+	</div>
+	<div class = "img">
+		<img id = "img" src="images/pic20220112.JPG" alt="画像">
+	<div>
+
+	<!--ドロワーメニュー-->
+	<div class="menu-trigger" href="">
+		<span></span>
+		<span></span>
+		<span></span>
+		</div>
+		<nav>
+			<ul>
+				<li><a href="index.html">Mana Calendar(Top Page)</a></li>
+				<li><a href="birthday_book2022/index.html">Birthday_Book2022</a></li>
+				<li><a href="./Anniversary/first_anniv.html">June 26 2022</a></li>
+                <li><a href="./Anniversary/slide220625.html">slide show</a></li>
+				<li><a href="./HighAndLow/HighAndLow.html">ハイアンドロー(トランプゲーム)</a></li>
+			</ul>
+		</nav>
+	<div class="overlay"></div>
+        
+	<!--jquery import-->
+	<script type="text/javascript" src="birthday_book2022/extras/jquery.min.1.7.js"></script>
+	<script type = "text/javascript">
+		//クッキーの期限は30日
+		/*
+		var exdate = new Date();
+		exdate.setTime(exdate.getTime() + 30 * 24 * 60 * 60 * 1000);
+		exdate = exdate.toGMTString();
+		*/
+		function getCookieArray(){
+			var arr = new Array();
+			if(document.cookie != ''){
+				var tmp = document.cookie.split('; ');
+				for(var i=0;i<tmp.length;i++){
+					var data = tmp[i].split('=');
+					arr[data[0]] = decodeURIComponent(data[1]);
+				}
+			}
+			return arr;
+		}
+
+		//ドロワーメニュー
+		$('.menu-trigger').on('click',function(){
+			if($(this).hasClass('active')){
+			$(this).removeClass('active');
+			$('nav').removeClass('open');
+			$('.overlay').removeClass('open');
+			} else {
+			$(this).addClass('active');
+			$('nav').addClass('open');
+			$('.overlay').addClass('open');
+			}
+		});
+		$('.overlay').on('click',function(){
+			if($(this).hasClass('open')){
+			$(this).removeClass('open');
+			$('.menu-trigger').removeClass('active');
+			$('nav').removeClass('open');      
+			}
+		});
+		//ここまでドロワーメニュー
+
+		var cnt = 0;
+
+		function changeDate(){
+			var today = new Date();
+			if(document.cookie.indexOf('visited=yes') === -1){
+				//クッキーがない
+				document.cookie = 'visited=yes; max-ages=2592000';
+				//今日の日付をクッキーに記録
+				var today = new Date();
+				var todayyyyy = today.getFullYear();
+				var todaym = today.getMonth()+1;
+				var todaymm = ("0" + (today.getMonth()+1)).slice(-2);
+				var todayd = today.getDate();
+				var todaydd = ("0" + (today.getDate())).slice(-2);
+				document.cookie = "date="+todayyyyy+"/"+todaymm+"/"+todaydd+"; max-ages=2592000";
+
+				document.getElementById("month_text").innerText = todaym + "月";
+				document.getElementById("date_text").innerText = todayd + "日";
+				img.src = "images/pic" + todayyyyy + todaymm + todaydd + ".JPG";
+
+			} 
+			else{
+				var arr = getCookieArray();
+				var currentdate = new Date(arr["date"]);
+				var yyyy = currentdate.getFullYear();
+				var m = currentdate.getMonth()+1;
+				var mm = ("0" + (currentdate.getMonth()+1)).slice(-2);
+				var d = currentdate.getDate();
+				var dd = ("0" + (currentdate.getDate())).slice(-2);
+
+				document.getElementById("month_text").innerText = m + "月";
+				document.getElementById("date_text").innerText = d + "日";
+				img.src = "images/pic" + yyyy + mm + dd + ".JPG";
+			}
+		}
+		changeDate();
+		var today = new Date();
+		var BirthDay = new Date('March,20 2022 00:00:00');
+		//1st Anniversary Date
+		var FirstAnnivDay = new Date('June, 25 2022 00:00:00');
+		//var FirstAnnivDay = new Date('June, 22 2022 00:00:00');
+		//var BirthDay = new Date('March,13 2022 00:00:00');
+		var BirthDayplus = BirthDay.setDate(BirthDay.getDate() + 1);//誕生日の一日後
+		if((today.getMonth() == BirthDay.getMonth())){//誕生日をすぎているならページ遷移
+			if(today.getDate() == BirthDay.getDate())
+			location.href="/birthday.html";
+			//location.href="/birthday_book2022/html/index.html";
+		}
+		/*
+		if((today.getFullYear() == FirstAnnivDay.getFullYear())){
+			if((today.getMonth() == FirstAnnivDay.getMonth())){//1年記念日ならページ遷移
+				if(today.getDate() == FirstAnnivDay.getDate())
+				location.href="/Anniversary/first_anniv.html";
+			}
+		}
+		*/
+		//location.href="/birthday_book2022/html/index.html";
+		
+		document.getElementById("back_button").onclick=function(){
+			//cnt--;
+			var arr = getCookieArray();
+			var currentdate = new Date(arr["date"]);
+			currentdate.setDate(currentdate.getDate() - 1);
+			var yyyy = currentdate.getFullYear();
+			var mm = ("0" + (currentdate.getMonth()+1)).slice(-2);
+			var dd = ("0" + (currentdate.getDate())).slice(-2);
+			document.cookie = "date="+yyyy+"/"+mm+"/"+dd;
+			changeDate();
+		}
+		/*
+		document.getElementById("forward_button").onclick=function(){
+			//cnt++;
+			var arr = getCookieArray();
+			var currentdate = new Date(arr["date"]);
+			currentdate.setDate(currentdate.getDate() + 1);
+			var yyyy = currentdate.getFullYear();
+			var mm = ("0" + (currentdate.getMonth()+1)).slice(-2);
+			var dd = ("0" + (currentdate.getDate())).slice(-2);
+			document.cookie = "date="+yyyy+"/"+mm+"/"+dd+"; max-ages=2592000";
+			changeDate();
+		}
+		*/
+		document.getElementById("reset_button").onclick=function(){
+			//cnt--;
+			var today = new Date();
+			var todayyyyy = today.getFullYear();
+			var todaym = today.getMonth()+1;
+			var todaymm = ("0" + (today.getMonth()+1)).slice(-2);
+			var todayd = today.getDate();
+			var todaydd = ("0" + (today.getDate())).slice(-2);
+			document.cookie = "date="+todayyyyy+"/"+todaymm+"/"+todaydd+"; max-ages=2592000";
+			changeDate();
+		}
+		
+	</script>
+	<script src="/socket.io/socket.io.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+	<script src="../index.js"></script>
+    </body>
+
+</html>

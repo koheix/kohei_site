@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset = "utf-8"/>
+	<!-- CSSファイルを読み込む -->
+     	<link rel="stylesheet" href="./style.css" />
+		<title>Happy 1st Anniversary!!</title>
+    </head>
+    <body>
+        <!--ドロワーメニュー-->
+        <div class="menu-trigger" href="">
+            <span></span>
+            <span></span>
+            <span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Mana Calendar(Top Page)</a></li>
+                    <li><a href="../birthday_book2022/index.html">Birthday_Book2022</a></li>
+                    <li><a href="#">June 26 2022</a></li>
+                    <li><a href="./slide220625.html">slide show</a></li>
+                </ul>
+            </nav>
+        <div class="overlay"></div>
+
+        <div class = "wrapper">
+
+            
+            <h1>明日のプランを選んでね(画像は押すと詳しく見れるよ)</h1>
+            <hr>
+            <h2><span class="title">神戸網羅コース</span></h2>
+            <p>　　　　　北野異人館</p>
+            <a href="https://www.lemon8-app.com/sayaka1998/7102335949471777285?region=jp&page_name=search&logextra=%7B%22search_result_id%22:%227102335949471777285%22,%22media_type%22:0,%22author_id%22:%226948737927871071237%22,%22search_id%22:%227111999251927927046%22,%22request_id%22:%227111999251927927046%22,%22rank%22:6,%22channel%22:%22main%22,%22query%22:%22%E5%8C%97%E9%87%8E%E7%95%B0%E4%BA%BA%E9%A4%A8%22,%22search_from%22:%22input%22,%22event_index%22:1655891986753%7D">
+                <figure>
+                    <img id = "img" src="photo/kitano1.jpg" alt="異人館1">
+                </figure>
+            </a>
+            <a href="https://tori-dori.com/kansai/2019/01/25/51704/">
+                <figure>
+                    <img id = "img" src="photo/kitano2.jpg" alt="異人館2">
+                </figure>
+            </a>
+            <p>神戸の山側、おしゃれな北野異人館を探索しようコースだよ。<br>
+                僕は行ったことがないよ(笑)
+            </p>
+            <hr>
+            <h2><span class="title">もっかい温泉!～温泉街、夜景コース～</span></h2>
+            <p>　　　　　　　　　　有馬の温泉街を満喫</p>
+            <a href="https://travel.rakuten.co.jp/mytrip/howto/yumeguri-arima">
+                <figure>
+                    <img id = "img" src="photo/arima1.jpg" alt="有馬温泉1">
+                </figure>
+            </a>
+            <p>有馬温泉の温泉街を満喫しよう。<br>
+                足湯もあるよ。
+            </p>
+            <p>　　　　　　　　　　　摩耶山の夜景</p>
+            <a href="https://yakei.jp/japan/spot.php?i=maya">
+                <figure>
+                    <img id = "img" src="photo/arima2.jpg" alt="有馬温泉2">
+                </figure>
+            </a>
+            <hr>
+            <h2><span class="title">海岸線ドライブ～明石コース～</span></h2>
+            <p>　　明石海峡を見渡せるイタリアンレストラン</p>
+            <a href="https://www.lemon8-app.com/i1942/6989983299049619973?region=jp&page_name=search&logextra=%7B%22search_result_id%22:%226989983299049619973%22,%22media_type%22:0,%22author_id%22:%226946563452131771397%22,%22search_id%22:%227112004089411815685%22,%22request_id%22:%227112004089411815685%22,%22rank%22:1,%22channel%22:%22main%22,%22query%22:%22FIESTA%22,%22search_from%22:%22history_sug%22,%22event_index%22:1655891986871%7D">
+                <figure>
+                    <img id = "img" src="photo/akashi1.jpg" alt="FIESTA">
+                </figure>
+            </a>
+            <p>　　　　　　　　天文科学館のプラネタリウム</p>
+            <a href="https://www.yokoso-akashi.jp/facility/2503">
+                <figure>
+                    <img id = "img" src="photo/akashi2.jpg" alt="明石2">
+                </figure>
+            </a>
+            <p>このコースは、明石-神戸間の海岸線をドライブするコースだよ。<br>
+                明石では明石焼きや明石城跡、日本標準時子午線が通っているプラネタリウムがあるよ。<br>
+                海岸線では上のような景色のイタリアンレストランや、大蔵海岸があるよ
+            </p>
+            <hr>
+            <h2><span class="title">六甲山アスレチックコース</span></h2>
+            <p>　　　　　　　　　六甲のアスレチック</p>
+            <a href="https://www.rokkosan.com/greenia/">
+                <figure>
+                    <img id = "img" src="photo/rokkou1.jpg" alt="六甲のアスレチック">
+                </figure>
+            </a>
+            <p>
+                水上アスレチック以外も充実していて、それ以外でもたくさん楽しめるよ！
+            </p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+        </div>
+        
+
+        <!--jquery import-->
+        <script type="text/javascript" src="../birthday_book2022/extras/jquery.min.1.7.js"></script>
+        <script type = "text/javascript">
+
+		//ドロワーメニュー
+		$('.menu-trigger').on('click',function(){
+			if($(this).hasClass('active')){
+			$(this).removeClass('active');
+			$('nav').removeClass('open');
+			$('.overlay').removeClass('open');
+			} else {
+			$(this).addClass('active');
+			$('nav').addClass('open');
+			$('.overlay').addClass('open');
+			}
+		});
+		$('.overlay').on('click',function(){
+			if($(this).hasClass('open')){
+			$(this).removeClass('open');
+			$('.menu-trigger').removeClass('active');
+			$('nav').removeClass('open');      
+			}
+		});
+		//ここまでドロワーメニュー
+        </script>
+
+    </body>
+
+</html>

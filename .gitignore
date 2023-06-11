@@ -7,3 +7,5 @@ photo/
 images/
 # 曲などもgit管理しない
 20220625.mp3
+# cardのダウンロードスクリプトをgit管理しない
+download_cards.sh

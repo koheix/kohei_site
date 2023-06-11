@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset = "utf-8"/>
+	<!-- CSSファイルを読み込む -->
+        <link rel="stylesheet" href="./slide_style.css" />
+		<title>一年記念スライドショー</title>
+
+
+        <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="bxslider/jquery.bxslider.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.slider').bxSlider({
+                    auto: true,
+                    pause: 3000,
+                });
+            });
+        </script>
+        
+    </head>
+    <body>
+        <div>
+        <p class="btn"><a onclick="sound()">再生</a></p>
+        <audio id = "sound" src="20220625.mp3" loop>
+            あなたのブラウザーは <code>audio</code>要素をサポートしていません。
+        </audio>
+        </div>
+        <!--ドロワーメニュー-->
+        <div class="menu-trigger" href="">
+            <span></span>
+            <span></span>
+            <span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Mana Calendar(Top Page)</a></li>
+                    <li><a href="../birthday_book2022/index.html">Birthday_Book2022</a></li>
+                    <li><a href="./first_anniv.html">June 26 2022</a></li>
+                    <li><a href="#">slide show</a></li>
+                </ul>
+            </nav>
+        <div class="overlay"></div>
+
+        <div class="slider">
+            <script type="text/javascript">
+                
+                //再生ボタン
+                (function (window, $) {
+                'use strict';
+                $.fn.useSound = function (_event, _id) {
+                    var se = $(_id);
+                    this.on(_event, function(){
+                    se[0].currentTime = 0;
+                    se[0].play();
+                    });
+                    return this;
+                };
+                })(this, this.jQuery);
+                $('.btn a').useSound('mousedown touchstart', '#sound');
+                
+                //写真表示
+                function getRandomInt(max) {
+                    return Math.floor(Math.random() * max);
+                }
+                var photourl = '<img src="../images/pic20220314.JPG" alt="">';
+                var monthint = 1;
+                var dayint = 1;
+                for(let i = 0;i < 100;i++){
+                    monthint = ( '00' + (getRandomInt(12)+1) ).slice( -2 );
+                    dayint = ( '00' + (getRandomInt(28)+1) ).slice( -2 );
+                    photourl = '<img src="../images/pic2022' + monthint + dayint + '.JPG" width="500"  alt="">';
+                    document.write(photourl);
+                }
+            </script>
+            
+        </div>
+
+
+        <!--jquery import-->
+        <!--<script type="text/javascript" src="../birthday_book2022/extras/jquery.min.1.7.js"></script>-->
+
+        <script type = "text/javascript">
+
+         //ドロワーメニュー
+        $('.menu-trigger').on('click',function(){
+            if($(this).hasClass('active')){
+            $(this).removeClass('active');
+            $('nav').removeClass('open');
+            $('.overlay').removeClass('open');
+            } else {
+            $(this).addClass('active');
+            $('nav').addClass('open');
+            $('.overlay').addClass('open');
+            }
+        });
+        $('.overlay').on('click',function(){
+            if($(this).hasClass('open')){
+            $(this).removeClass('open');
+            $('.menu-trigger').removeClass('active');
+            $('nav').removeClass('open');      
+            }
+        });
+        //ここまでドロワーメニュー
+        </script>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset = "utf-8"/>
+	<!-- CSSファイルを読み込む -->
+     	<link rel="stylesheet" href="./style.css" />
+        <!--jquery import-->
+        <script type="text/javascript" src="../birthday_book2022/extras/jquery.min.1.7.js"></script>
+		<title>ハイアンドローゲーム</title>
+    </head>
+    <body>
+        <!--ドロワーメニュー-->
+        <div class="menu-trigger" href="">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Mana Calendar(Top Page)</a></li>
+                <li><a href="../birthday_book2022/index.html">Birthday_Book2022</a></li>
+                <li><a href="../Anniversary/first_anniv.html">June 26 2022</a></li>
+                <li><a href="../Anniversary/slide220625.html">slide show</a></li>
+                <li><a href="#">HighAndLow</a></li>
+            </ul>
+        </nav>
+        <div class="overlay"></div>
+
+        <div class = "wrapper">
+            <div id = "main_window">
+                <div id = "ready_page">
+                    <p>プレイヤー名</p>
+                    <input type="text" id="player_name" value="player1">
+                    <button id = "ready_btn" onclick="ready_clicked()">READY</button>
+                </div>
+                <div id = "play_page">
+                    <img src="cards/card_back.png"> 
+                    <button id = "high_btn" onclick="high_clicked()">HIGH</button>
+                    <button id = "low_btn" onclick="low_clicked()">LOW</button>
+                </div>
+            </div>
+        </div>
+        
+
+        <!--jquery import-->
+        <!-- <script type="text/javascript" src="../birthday_book2022/extras/jquery.min.1.7.js"></script> -->
+        <script type = "text/javascript">
+
+		//ドロワーメニュー
+		$('.menu-trigger').on('click',function(){
+			if($(this).hasClass('active')){
+			$(this).removeClass('active');
+			$('nav').removeClass('open');
+			$('.overlay').removeClass('open');
+			} else {
+			$(this).addClass('active');
+			$('nav').addClass('open');
+			$('.overlay').addClass('open');
+			}
+		});
+		$('.overlay').on('click',function(){
+			if($(this).hasClass('open')){
+			$(this).removeClass('open');
+			$('.menu-trigger').removeClass('active');
+			$('nav').removeClass('open');      
+			}
+		});
+		//ここまでドロワーメニュー
+        </script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="HighAndLow.js"></script>
+        <!-- <script src="HAL_server.js"></script> -->
+    </body>
+
+</html>
