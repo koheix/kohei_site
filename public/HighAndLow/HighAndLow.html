@@ -34,7 +34,9 @@
                     <button id = "ready_btn" onclick="ready_clicked()">READY</button>
                 </div>
                 <div id = "play_page">
-                    <img src="cards/card_back.png"> 
+                    <img id = "current_card" src="cards/card_back.png"> 
+                    <!-- ボタンの上にターンを知らせるテキストを表示する(最初は透明) -->
+                    <p id = "turn_text" style="opacity:0">YOUR TURN</p>
                     <button id = "high_btn" onclick="high_clicked()">HIGH</button>
                     <button id = "low_btn" onclick="low_clicked()">LOW</button>
                 </div>
