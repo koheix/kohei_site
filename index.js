@@ -22,7 +22,8 @@ server.listen(
     PORT, HOSTNAME,
     () =>
     {
-        const HOST = ip.address();
+        // const HOST = ip.address();
+        const HOST = "192.168.11.7";
         console.log("Server on  %s:%d", HOST,PORT);
     }
 );
@@ -34,6 +35,9 @@ var cnt = 0;
 var player = {};
 //キーがsocketID, 要素がターンか否かのブール
 var isTurn = {};
+
+//ゲームの準備完了か否かのブール
+var player_ready = [false, false];
 
 //カードの画像の名前を格納した配列
 var cards_pic_name = [
@@ -106,18 +110,23 @@ var current_number = 0;
 io.on(
     "connection", (socket) =>{
         console.log("connection");
+        // cnt++;
 
         //disconnection
         socket.on(
             'disconnect', () =>{
                 console.log( 'disconnect' );
                 //playerの人数を減らす
-                cnt--;
+                // cnt--;
+                cnt = Math.max(--cnt, 0)
             } 
         );
 
         socket.on(
             "HAL_name", (player_name)=>{
+                //プレイヤーの状態をreadyにする
+                player_ready[socket.id] = true;
+
                 //名前を記録
                 player[socket.id] = player_name;
                 console.log(player[socket.id]);
@@ -207,7 +216,7 @@ io.on(
                             // 正解不正解を知らせる
                             await setTimeout(function() {
                                 io.sockets.emit("HAL_iscorrect", isCorrect, player[socket.id]);
-                            }, 300);
+                            }, 500);
                         })();
                         //HAL_turn_changeを送信する(画面に表示するため)
                         io.sockets.emit("HAL_turn_change", true);
